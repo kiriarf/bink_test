@@ -39,16 +39,21 @@ class DataProcessor():
             print(f'{i + 1}.')
             print(helpers.prettify_row(row))
 
-    # def print_rows_and_total_rent_with_n_lease_years(self, n=25, data=None):
-    #     if data is None:
-    #         data = self.data
-    #
-    #     rows_with_n_lease_years = [row for row in data if row['lease_years'] == n]
-    #
-    #     total_rent = 0
-    #     for row in rows_with_n_lease_years:
-    #         total_rent += row['current_rent']
-    #         print
+    def print_rows_and_total_rent_with_n_lease_years(self, n=25, data=None):
+        if data is None:
+            data = self.data
+
+        rows_with_n_lease_years = [row for row in data if row['lease_years'] == n]
+
+        total_rent = 0
+
+        print(f'All masts with lease equal {n} years:')
+        for row in rows_with_n_lease_years:
+            total_rent += row['current_rent']
+            print(helpers.prettify_row(row))
+
+        print(f'Total Rent: {total_rent:.2f}')
+
 
 
 
