@@ -21,6 +21,10 @@ class TestHelpers(unittest.TestCase):
             {
                 'tenant_name': 'Han',
                 'current_rent': 200.00
+            },
+            {
+                'tenant_name': 'Luke',
+                'current_rent': 300.00
             }
         ]
 
@@ -74,6 +78,16 @@ class TestHelpers(unittest.TestCase):
         result = helpers.prettify_row(row)
 
         assert result == "Property: Seacroft Gate (Chase) - Block 2\nAddress: Telecomms Apparatus, Leeds\nUnit: Seacroft Gate (Chase) - Block 2, WYK 0414\nTenant: Hutchinson3G Uk Ltd&Everything Everywhere Ltd\nRent: 12750.00 (from 21/08/2007 to 20/08/2032, 25 years)\n"
+
+    def test_count_occurrences_by_key(self):
+        result = helpers.count_occurrences_by_key('tenant_name', self.data)
+
+        assert result == {
+            'Luke': 2,
+            'Leia': 1,
+            'Han': 1
+        }
+
 
 if __name__ == '__main__':
     unittest.main()

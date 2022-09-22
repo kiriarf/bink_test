@@ -20,3 +20,16 @@ def prettify_row(row):
           f'{"Unit: " + row["unit_name"] + chr(10) if row["unit_name"] else None}'
           f'{"Tenant: " + row["tenant_name"] + chr(10) if row["tenant_name"] else None}'
           f'{"Rent: " + rent_string + chr(10) if row["current_rent"] else None}')
+
+
+def count_occurrences_by_key(key, data):
+    result = {}
+
+    for row in data:
+        value = row[key]
+        if value in result:
+            result[value] += 1
+        else:
+            result[value] = 1
+    # print(result)
+    return result
