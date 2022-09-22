@@ -54,6 +54,18 @@ class DataProcessor():
 
         print(f'Total Rent: {total_rent:.2f}')
 
+    def print_count_of_masts_per_tenant(self, data=None):
+        if data is None:
+            data = self.data
+
+        count_dict = helpers.count_occurrences_by_key('tenant_name', data)
+        sorted_list = sorted(count_dict.items(), key=lambda item: item[1], reverse=True)
+
+        print('Count of masts for each tenant:')
+        for item in sorted_list:
+            if item[1] == 0:
+                break
+            print(f'{item[0]}: {item[1]}')
 
 
 
