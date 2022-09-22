@@ -10,6 +10,9 @@ CSV_PATH = 'dataset.csv'
 
 
 class TestDataProcessor(unittest.TestCase):
+    """
+    Tests for the DataProcessor class.
+    """
     def setUp(self):
         self.data_processor = data_processor.DataProcessor(CSV_PATH)
         self.data_processor.read_from_csv(self.data_processor.file_path)

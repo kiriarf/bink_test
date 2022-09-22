@@ -1,12 +1,31 @@
 def normalise_headers(headers):
+    """
+    Takes a list of headers, and converts them to snake_case.
+
+    :param headers: list of headers ([str])
+    :returns: [str]
+    """
     return [' '.join(header.split()).replace(" ", "_").replace("[", "").replace("]", "").lower() for header in headers]
 
 
 def sort_by_key(key, data):
+    """
+    Sorts a list of dictionaries by a common key.
+
+    :param key: by which key to sort (str)
+    :param data: list of dictionaries to sort ([dict])
+    :returns: [dict]
+    """
     return sorted(data, key=lambda row: row[key])
 
 
 def prettify_row(row):
+    """
+    Takes a row and returns its user-friendly representation.
+
+    :param row: row of data (dict)
+    :returns: str
+    """
     address_field_values = [row['property_address_1'], row['property_address_2'], row['property_address_3'], row['property_address_4']]
     full_address = ''
     for value in address_field_values:
@@ -23,6 +42,13 @@ def prettify_row(row):
 
 
 def count_occurrences_by_key(key, data):
+    """
+    Returns count of each value's occurrence for a given key in a list of dictionaries.
+
+    :param key: which key's values to count (str)
+    :param data: list of dictionaries to check ([dict])
+    :returns: dict
+    """
     result = {}
 
     for row in data:

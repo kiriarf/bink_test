@@ -8,6 +8,10 @@ from data_processor import helpers
 
 
 class TestHelpers(unittest.TestCase):
+    """
+    Tests for the Helpers module.
+    """
+
     def setUp(self):
         self.data = [
             {

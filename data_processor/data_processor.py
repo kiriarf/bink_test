@@ -5,11 +5,24 @@ from . import helpers
 
 
 class DataProcessor():
+    """
+    Class responsible for reading a dataset and printing some insights from it.
+
+    :param file_path: file path of the .csv dataset (string)
+    """
+
     def __init__(self, file_path):
         self.file_path = file_path
         self.data = []
 
     def read_from_csv(self, file_path=None):
+        """
+        Reads data from a .csv, normalises the headers to snake_case and converts
+        data types of some columns
+
+        :param file_path: file path of the .csv dataset (string | None)
+        :returns: None
+        """
         if file_path is None:
             file_path = self.file_path
 
@@ -25,6 +38,13 @@ class DataProcessor():
                 self.data.append(row)
 
     def print_top_n_items_by_column(self, n, key):
+        """
+        Prints top n items sorted by a key from self.data.
+
+        :param n: how many items to print (int)
+        :param key: one of the keys in each item (string)
+        :returns: None
+        """
         if n > len(self.data):
             n = len(self.data)
 
@@ -37,6 +57,12 @@ class DataProcessor():
             print(helpers.prettify_row(row))
 
     def print_rows_and_total_rent_with_n_lease_years(self, n):
+        """
+        Prints all rows from self.data and total rent for those rows where lease_years is n.
+
+        :param n: value of lease_years to find (int)
+        :returns: None
+        """
         rows_with_n_lease_years = [row for row in self.data if row['lease_years'] == n]
 
         total_rent = 0
@@ -49,6 +75,11 @@ class DataProcessor():
         print(f'\nTotal Rent: {total_rent:.2f}')
 
     def print_count_of_masts_per_tenant(self):
+        """
+        Prints number of mast rentals for each tenant.
+
+        :returns: None
+        """
         count_dict = helpers.count_occurrences_by_key('tenant_name', self.data)
         sorted_list = sorted(count_dict.items(), key=lambda item: item[1], reverse=True)
 
@@ -59,6 +90,13 @@ class DataProcessor():
             print(f'{item[0]}: {item[1]}')
 
     def print_rentals_between(self, start_date, end_date):
+        """
+        Prints all rentals, where lease_start_date is between start_date and end_date (inclusive)
+
+        :param start_date: date from which to filter (datetime.date())
+        :param end_date: date until which to filter (datetime.date())
+        :returns: None
+        """
         sorted_by_start_date = helpers.sort_by_key('lease_start_date', self.data)
         rows_to_print = [
             row for row in sorted_by_start_date
