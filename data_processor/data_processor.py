@@ -30,7 +30,7 @@ class DataProcessor():
 
         sorted_data = helpers.sort_by_key(key, self.data)
 
-        print(f'Top {n} masts in ascending order (ordered by {key}):')
+        print(f'\nTop {n} masts in ascending order (ordered by {key}):')
         for i in range(n):
             row = sorted_data[i]
             print(f'{i + 1}.')
@@ -41,7 +41,7 @@ class DataProcessor():
 
         total_rent = 0
 
-        print(f'All masts with lease equal {n} years:')
+        print(f'\nAll masts with lease equal {n} years:')
         for row in rows_with_n_lease_years:
             total_rent += row['current_rent']
             print(helpers.prettify_row(row))
@@ -52,7 +52,7 @@ class DataProcessor():
         count_dict = helpers.count_occurrences_by_key('tenant_name', self.data)
         sorted_list = sorted(count_dict.items(), key=lambda item: item[1], reverse=True)
 
-        print('Count of masts for each tenant:')
+        print('\nCount of masts for each tenant:')
         for item in sorted_list:
             if item[1] == 0:
                 break
@@ -71,7 +71,7 @@ class DataProcessor():
             if start_date <= row['lease_start_date'] <= end_date
         ]
 
-        print(f'Rentals between {start_date:%d/%m/%Y} and {end_date:%d/%m/%Y}:')
+        print(f'\nRentals between {start_date:%d/%m/%Y} and {end_date:%d/%m/%Y}:')
         for row in rows_to_print:
             print(helpers.prettify_row(row))
 
