@@ -12,9 +12,8 @@ class DataProcessor():
 
         with open(file_path, mode='r') as csv_file:
             reader = csv.DictReader(csv_file)
-            
             reader.fieldnames = self.normalise_headers(reader.fieldnames)
-            print(reader.fieldnames)
+            
             for row in reader:
                 result.append(row)
 
