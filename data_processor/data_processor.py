@@ -24,7 +24,7 @@ class DataProcessor():
                 row['current_rent'] = float(row['current_rent'])
                 self.data.append(row)
 
-    def print_top_n_items_by_column(self, n=5, key='current_rent'):
+    def print_top_n_items_by_column(self, n, key):
         if n > len(self.data):
             n = len(self.data)
 
@@ -36,7 +36,7 @@ class DataProcessor():
             print(f'{i + 1}.')
             print(helpers.prettify_row(row))
 
-    def print_rows_and_total_rent_with_n_lease_years(self, n=25):
+    def print_rows_and_total_rent_with_n_lease_years(self, n):
         rows_with_n_lease_years = [row for row in self.data if row['lease_years'] == n]
 
         total_rent = 0
@@ -46,7 +46,7 @@ class DataProcessor():
             total_rent += row['current_rent']
             print(helpers.prettify_row(row))
 
-        print(f'Total Rent: {total_rent:.2f}')
+        print(f'\nTotal Rent: {total_rent:.2f}')
 
     def print_count_of_masts_per_tenant(self):
         count_dict = helpers.count_occurrences_by_key('tenant_name', self.data)
@@ -58,13 +58,7 @@ class DataProcessor():
                 break
             print(f'{item[0]}: {item[1]}')
 
-    def print_rentals_between(self, start_date=None, end_date=None):
-        if start_date is None:
-            start_date = datetime(1999, 6, 1).date()
-
-        if end_date is None:
-            end_date = datetime(2007, 8, 31).date()
-
+    def print_rentals_between(self, start_date, end_date):
         sorted_by_start_date = helpers.sort_by_key('lease_start_date', self.data)
         rows_to_print = [
             row for row in sorted_by_start_date
