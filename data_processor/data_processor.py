@@ -1,6 +1,8 @@
 import csv
 from datetime import datetime
 
+from . import helpers
+
 
 class DataProcessor():
     def __init__(self, file_path):
@@ -13,7 +15,7 @@ class DataProcessor():
 
         with open(file_path, mode='r') as csv_file:
             reader = csv.DictReader(csv_file)
-            reader.fieldnames = self.normalise_headers(reader.fieldnames)
+            reader.fieldnames = helpers.normalise_headers(reader.fieldnames)
 
             for row in reader:
                 row['lease_start_date'] = datetime.strptime(row['lease_start_date'], '%d %b %Y')
@@ -22,14 +24,11 @@ class DataProcessor():
                 row['current_rent'] = float(row['current_rent'])
                 self.data.append(row)
 
-    def normalise_headers(self, headers):
-        return [' '.join(header.split()).replace(" ", "_").replace("[", "").replace("]", "").lower() for header in headers]
+    # def print_top_n_items_by_column(self, n=5, key='current_rent', data=None):
+    #     if data is None:
+    #         data = self.data
 
-    def sort_by_current_rent(self, data=None):
-        if data is None:
-            data = self.data
 
-        return sorted(data, key=lambda row: row['current_rent'])
 
             
 
