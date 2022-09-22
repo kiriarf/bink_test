@@ -5,6 +5,7 @@ def normalise_headers(headers):
     :param headers: list of headers ([str])
     :returns: [str]
     """
+    # Note: I would use a regex in production to make it more robust.
     return [' '.join(header.split()).replace(" ", "_").replace("[", "").replace("]", "").lower() for header in headers]
 
 

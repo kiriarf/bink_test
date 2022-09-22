@@ -7,6 +7,11 @@ from . import helpers
 class DataProcessor():
     """
     Class responsible for reading a dataset and printing some insights from it.
+    For simplicity, I assumed that the column names are always in the format that was given.
+    Otherwise, some error handling (e.g. for KeyError) could be added.
+
+    Also, I've used some list comprehensions, but would change them to generators if working
+    with larger datasets to avoid memory issues.
 
     :param file_path: file path of the .csv dataset (string)
     """
@@ -45,6 +50,7 @@ class DataProcessor():
         :param key: one of the keys in each item (string)
         :returns: None
         """
+        # do not allow to output more rows than exist
         if n > len(self.data):
             n = len(self.data)
 
@@ -81,12 +87,12 @@ class DataProcessor():
         :returns: None
         """
         count_dict = helpers.count_occurrences_by_key('tenant_name', self.data)
+        # Sorting by number of occurences here to output in sorted order,
+        # thought it was more readable.
         sorted_list = sorted(count_dict.items(), key=lambda item: item[1], reverse=True)
 
         print('\nCount of masts for each tenant:')
         for item in sorted_list:
-            if item[1] == 0:
-                break
             print(f'{item[0]}: {item[1]}')
 
     def print_rentals_between(self, start_date, end_date):
