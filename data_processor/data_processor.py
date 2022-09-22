@@ -67,6 +67,27 @@ class DataProcessor():
                 break
             print(f'{item[0]}: {item[1]}')
 
+    def print_rentals_between(self, start_date=None, end_date=None, data=None):
+        if start_date is None:
+            start_date = datetime(1999, 6, 1).date()
+
+        if end_date is None:
+            end_date = datetime(2007, 8, 31).date()
+
+        if data is None:
+            data = self.data
+
+        sorted_by_start_date = helpers.sort_by_key('lease_start_date', data)
+        rows_to_print = [
+            row for row in sorted_by_start_date
+            if start_date <= row['lease_start_date'] <= end_date
+        ]
+
+        print(f'Rentals between {start_date:%d/%m/%Y} and {end_date:%d/%m/%Y}:')
+        for row in rows_to_print:
+            print(helpers.prettify_row(row))
+
+
 
 
 
