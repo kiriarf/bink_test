@@ -24,6 +24,13 @@ class DataProcessor():
 
     def normalise_headers(self, headers):
         return [' '.join(header.split()).replace(" ", "_").replace("[", "").replace("]", "").lower() for header in headers]
+
+    def sort_by_current_rent(self, data=None):
+        if data is None:
+            data = self.data
+
+        return sorted(data, key=lambda row: row['current_rent'])
+
             
 
         
