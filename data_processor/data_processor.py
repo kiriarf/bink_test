@@ -33,7 +33,7 @@ class DataProcessor():
 
         sorted_data = helpers.sort_by_key(key, data)
 
-        print(f'Top {n} masts in ascending order:')
+        print(f'Top {n} masts in ascending order (ordered by {key}):')
         for i in range(n):
             row = sorted_data[i]
             print(f'{i + 1}.')
