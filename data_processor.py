@@ -13,10 +13,10 @@ class DataProcessor():
         with open(file_path, mode='r') as csv_file:
             reader = csv.DictReader(csv_file)
             reader.fieldnames = self.normalise_headers(reader.fieldnames)
-            
+
             for row in reader:
                 result.append(row)
-
+        print(result[0])
         return result
 
     def normalise_headers(self, headers):
