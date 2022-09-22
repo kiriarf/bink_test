@@ -1,4 +1,6 @@
 import csv
+from datetime import datetime
+
 
 class DataProcessor():
     def __init__(self, file_path):
@@ -15,8 +17,13 @@ class DataProcessor():
             reader.fieldnames = self.normalise_headers(reader.fieldnames)
 
             for row in reader:
+                row['lease_start_date'] = datetime.strptime(row['lease_start_date'], '%d %b %Y')
+                row['lease_end_date'] = datetime.strptime(row['lease_end_date'], '%d %b %Y')
+                row['lease_years'] = int(row['lease_years'])
+                row['current_rent'] = float(row['current_rent'])
+
                 result.append(row)
-        print(result[0])
+
         return result
 
     def normalise_headers(self, headers):
