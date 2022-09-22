@@ -8,13 +8,20 @@ class DataProcessor():
         if file_path is None:
             file_path = self.file_path
         
+        result = []
+
         with open(file_path, mode='r') as csv_file:
             reader = csv.DictReader(csv_file)
             
-            result = []
-
+            reader.fieldnames = self.normalise_headers(reader.fieldnames)
+            print(reader.fieldnames)
             for row in reader:
-                print(row)
                 result.append(row)
 
-            return result
+        return result
+
+    def normalise_headers(self, headers):
+        return [' '.join(header.split()).replace(" ", "_").replace("[", "").replace("]", "").lower() for header in headers]
+            
+
+        
