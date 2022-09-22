@@ -24,14 +24,11 @@ class DataProcessor():
                 row['current_rent'] = float(row['current_rent'])
                 self.data.append(row)
 
-    def print_top_n_items_by_column(self, n=5, key='current_rent', data=None):
-        if data is None:
-            data = self.data
+    def print_top_n_items_by_column(self, n=5, key='current_rent'):
+        if n > len(self.data):
+            n = len(self.data)
 
-        if n > len(data):
-            n = len(data)
-
-        sorted_data = helpers.sort_by_key(key, data)
+        sorted_data = helpers.sort_by_key(key, self.data)
 
         print(f'Top {n} masts in ascending order (ordered by {key}):')
         for i in range(n):
@@ -39,11 +36,8 @@ class DataProcessor():
             print(f'{i + 1}.')
             print(helpers.prettify_row(row))
 
-    def print_rows_and_total_rent_with_n_lease_years(self, n=25, data=None):
-        if data is None:
-            data = self.data
-
-        rows_with_n_lease_years = [row for row in data if row['lease_years'] == n]
+    def print_rows_and_total_rent_with_n_lease_years(self, n=25):
+        rows_with_n_lease_years = [row for row in self.data if row['lease_years'] == n]
 
         total_rent = 0
 
@@ -54,11 +48,8 @@ class DataProcessor():
 
         print(f'Total Rent: {total_rent:.2f}')
 
-    def print_count_of_masts_per_tenant(self, data=None):
-        if data is None:
-            data = self.data
-
-        count_dict = helpers.count_occurrences_by_key('tenant_name', data)
+    def print_count_of_masts_per_tenant(self):
+        count_dict = helpers.count_occurrences_by_key('tenant_name', self.data)
         sorted_list = sorted(count_dict.items(), key=lambda item: item[1], reverse=True)
 
         print('Count of masts for each tenant:')
@@ -67,17 +58,14 @@ class DataProcessor():
                 break
             print(f'{item[0]}: {item[1]}')
 
-    def print_rentals_between(self, start_date=None, end_date=None, data=None):
+    def print_rentals_between(self, start_date=None, end_date=None):
         if start_date is None:
             start_date = datetime(1999, 6, 1).date()
 
         if end_date is None:
             end_date = datetime(2007, 8, 31).date()
 
-        if data is None:
-            data = self.data
-
-        sorted_by_start_date = helpers.sort_by_key('lease_start_date', data)
+        sorted_by_start_date = helpers.sort_by_key('lease_start_date', self.data)
         rows_to_print = [
             row for row in sorted_by_start_date
             if start_date <= row['lease_start_date'] <= end_date
