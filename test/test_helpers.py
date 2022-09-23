@@ -62,7 +62,7 @@ class TestHelpers(unittest.TestCase):
 
         result = helpers.prettify_row(row)
 
-        assert result == "Property: Seacroft Gate (Chase) - Block 2\nAddress: Telecomms Apparatus, Leeds, Some street, LS14\nUnit: Seacroft Gate (Chase) - Block 2, WYK 0414\nTenant: Hutchinson3G Uk Ltd&Everything Everywhere Ltd\nRent: 12750.00 (from 21/08/2007 to 20/08/2032, 25 years)\n"
+        assert result == "Property: Seacroft Gate (Chase) - Block 2\nAddress: Telecomms Apparatus, Leeds, Some street, LS14\nUnit: Seacroft Gate (Chase) - Block 2, WYK 0414\nTenant: Hutchinson3G Uk Ltd&Everything Everywhere Ltd\nRent: 12750.00 (from 21/08/2007 to 20/08/2032, 25 years)"
 
     def test_prettify_row_with_incomplete_address(self):
         row = {
@@ -81,7 +81,7 @@ class TestHelpers(unittest.TestCase):
 
         result = helpers.prettify_row(row)
 
-        assert result == "Property: Seacroft Gate (Chase) - Block 2\nAddress: Telecomms Apparatus, Leeds\nUnit: Seacroft Gate (Chase) - Block 2, WYK 0414\nTenant: Hutchinson3G Uk Ltd&Everything Everywhere Ltd\nRent: 12750.00 (from 21/08/2007 to 20/08/2032, 25 years)\n"
+        assert result == "Property: Seacroft Gate (Chase) - Block 2\nAddress: Telecomms Apparatus, Leeds\nUnit: Seacroft Gate (Chase) - Block 2, WYK 0414\nTenant: Hutchinson3G Uk Ltd&Everything Everywhere Ltd\nRent: 12750.00 (from 21/08/2007 to 20/08/2032, 25 years)"
 
     def test_count_occurrences_by_key(self):
         result = helpers.count_occurrences_by_key('tenant_name', self.data)
