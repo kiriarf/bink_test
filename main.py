@@ -32,17 +32,17 @@ if __name__ == "__main__":
             n = input('How many items? (Press Enter for default, 5): ')
             key = input('Sort by which category? (Press Enter for default, Current Rent): ')
 
-            if n is '':
+            if n == '':
                 n = 5
             else:
                 n = int(n)
-            if key is '':
+            if key == '':
                 key = 'current_rent'
 
             dp.print_top_n_items_by_column(n, key)
         elif option == 2:
             n = input('How many years? (Press Enter for default, 25): ')
-            if n is '':
+            if n == '':
                 n = 25
             else:
                 n = int(n)
@@ -55,12 +55,12 @@ if __name__ == "__main__":
             start_date = input('What is the start date? (Press Enter for default, 01/06/1999): ')
             end_date = input('What is the end date? (Press Enter for default, 31/08/2007): ')
 
-            if start_date is '':
+            if start_date == '':
                 start_date = datetime(1999, 6, 1).date()
             else:
                 start_date = datetime.strptime(start_date, '%d/%m/%Y').date()
 
-            if end_date is '':
+            if end_date == '':
                 end_date = datetime(2007, 8, 31).date()
             else:
                 end_date = datetime.strptime(end_date, '%d/%m/%Y').date()
